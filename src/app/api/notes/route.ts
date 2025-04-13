@@ -1,41 +1,38 @@
-import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { $notes } from "@/lib/db/schema";
 import { auth } from "@clerk/nextjs";
-import { eq, and, or } from "drizzle-orm";
+import { eq } from "drizzle-orm";
+import { NextResponse } from "next/server";
 
 export const runtime = "edge";
 
 export async function GET(req: Request) {
-  try {
-    const { userId } = auth();
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
+  const { userId } = await auth();
+  if (!userId) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
 
+  try {
     const { searchParams } = new URL(req.url);
     const isArchived = searchParams.get("isArchived") === "true";
     const isFavorite = searchParams.get("isFavorite") === "true";
 
-    let query = db
+    let notes = await db
       .select()
       .from($notes)
       .where(eq($notes.userId, userId));
 
     if (isArchived) {
-      query = query.where(eq($notes.isArchived, true));
+      notes = notes.filter(note => note.isArchived);
     } else if (isFavorite) {
-      query = query.where(eq($notes.isFavorite, true));
+      notes = notes.filter(note => note.isFavorite);
     } else {
-      // Default view shows non-archived notes
-      query = query.where(eq($notes.isArchived, false));
+      notes = notes.filter(note => !note.isArchived);
     }
-
-    const notes = await query.orderBy($notes.createdAt);
 
     return NextResponse.json(notes);
   } catch (error) {
-    console.error("[GET_NOTES]", error);
+    console.error("[NOTES_GET]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 } 

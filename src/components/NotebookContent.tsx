@@ -27,7 +27,7 @@ const NotebookContent = ({ note, userName }: NotebookContentProps) => {
           className="border shadow-2xl border-stone-200 rounded-lg p-4 flex items-center bg-white/80 backdrop-blur-sm"
         >
           <Link href="/dashboard">
-            <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300" size="sm">
+            <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300" size="sm">
               Back
             </Button>
           </Link>

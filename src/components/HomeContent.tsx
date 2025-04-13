@@ -149,7 +149,7 @@ export function HomeContent({ userId }: { userId: string | null }) {
                   <p className="text-gray-600">Student</p>
                 </div>
               </div>
-              <p className="text-gray-600">"NoteFlow has completely transformed how I organize my study notes. The interface is beautiful and intuitive!"</p>
+              <p className="text-gray-600">&ldquo;NoteFlow has completely transformed how I organize my study notes. The interface is beautiful and intuitive!&rdquo;</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -166,7 +166,7 @@ export function HomeContent({ userId }: { userId: string | null }) {
                   <p className="text-gray-600">Product Manager</p>
                 </div>
               </div>
-              <p className="text-gray-600">"As a product manager, I need to keep track of many ideas and notes. NoteFlow makes it easy to organize everything in one place."</p>
+              <p className="text-gray-600">&ldquo;As a product manager, I need to keep track of many ideas and notes. NoteFlow makes it easy to organize everything in one place.&rdquo;</p>
             </motion.div>
           </div>
         </div>
